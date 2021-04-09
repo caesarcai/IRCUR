@@ -171,9 +171,8 @@ for t = 1 : max_iter
     pinv_U = Vu(:,1:r)*Su*(Uu(:,1:r))';
 
     %% calculate L to get error
-    L_temp=C*pinv_U*R;
-    L_temp_cols = L_temp(:,cols);
-    L_temp_rows = L_temp(rows,:);
+    L_temp_cols = C * pinv_U * R(:,cols);
+    L_temp_rows = C (rows,:) * pinv_U * R;
     
     %% Stop Condition
     err(t) = (norm(D_rows-L_temp_rows-S_rows, 'fro') + norm(D_cols-L_temp_cols-S_cols, 'fro'))/norm_of_D;
