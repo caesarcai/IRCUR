@@ -1,4 +1,4 @@
-function [ C,pinv_U,R, timer, err] = IRCUR( D, r, para )
+function [ C, pinv_U , R, timer, err ] = IRCUR( D, r, para )
 % 
 % Inputs:
 % D : Observed matrix. Sum of underlying low rank matrix and underlying
@@ -113,7 +113,6 @@ err    = -1*ones(max_iter,1);
 timer  = zeros(max_iter,1);
 
 
-
 tic
 [m,n] = size(D);
 
@@ -130,6 +129,7 @@ if ~resample
     norm_of_D = (norm(D_rows, 'fro')+ norm(D_cols, 'fro'));
 end
 init_timer = toc;
+
 
 %% main algorithm
 for t = 1 : max_iter
