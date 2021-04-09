@@ -30,24 +30,25 @@ para.beta      = para.beta_init;
 para.tol       = 1e-5;
 para.con       = 3;
 para.resample  = true;
-[C1,pinv_U1,R1,ircur_r_timer,ircur_r_err]=IRCUR( D, r, para);
+[C1, pinv_U1, R1, ircur_r_timer, ircur_r_err] = IRCUR( D, r, para);
 
-recover_err_ircur_r = norm(L_true - C1*pinv_U1*R1, 'fro')/norm(L_true,'fro')
+recover_err_ircur_r = norm(L_true - C1 * pinv_U1 * R1, 'fro') / norm(L_true,'fro')
 
 
-disp('Running IRCUR-F now.')
+
 %% IRCUR-F    % Fix row/column version
+disp('Running IRCUR-F now.')
 para2.beta_init = 2*max(max(abs(L_true)));
 para2.beta      = para.beta_init;
 para2.tol       = 1e-5;
 para2.con       = 3;
 para2.resample  = false;
-[C2,pinv_U2,R2,ircur_f_timer,ircur_f_err]=IRCUR( D, r, para2);
+[C2, pinv_U2, R2, ircur_f_timer, ircur_f_err] = IRCUR( D, r, para2);
 
-recover_err_ircur_f = norm(L_true - C2*pinv_U2*R2, 'fro')/norm(L_true,'fro')
+recover_err_ircur_f = norm(L_true - C2 * pinv_U2 * R2, 'fro') / norm(L_true,'fro')
 
 
-
+%% Plot the converegence
 figure;
 plot(cumsum(ircur_r_timer),ircur_r_err,'bD-',cumsum(ircur_f_timer),ircur_f_err,'r+-');
 legend('ICUR-R','ICUR-F');

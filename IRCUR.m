@@ -150,6 +150,8 @@ for t = 1 : max_iter
     
     if t == 1
         zeta = beta_init;
+        L_cols =zeros(size(D_cols));
+        L_rows = zeros(size(D_rows));
         S_cols = wthresh( D_cols,'h',zeta);
         S_rows = wthresh( D_rows,'h',zeta);
     else
@@ -171,17 +173,17 @@ for t = 1 : max_iter
     pinv_U = Vu(:,1:r)*Su*(Uu(:,1:r))';
 
     %% calculate L to get error
-    L_temp_cols = C * pinv_U * R(:,cols);
-    L_temp_rows = C (rows,:) * pinv_U * R;
+%     L_cols = C * pinv_U * R(:,cols);
+%     L_rows = C (rows,:) * pinv_U * R;
     
     %% Stop Condition
-    err(t) = (norm(D_rows-L_temp_rows-S_rows, 'fro') + norm(D_cols-L_temp_cols-S_cols, 'fro'))/norm_of_D;
+    err(t) = (norm(D_rows-L_rows-S_rows, 'fro') + norm(D_cols-L_cols-S_cols, 'fro')) / norm_of_D;
     timer(t) = toc;
     if err(t) < tol  
         fprintf('Total %d iteration, final error: %e, total time: %f  \n', t, err(t), sum(timer(timer>0)));
-        err(1) = err(1) + init_timer;
-        err = err(1:t);
+        timer(1) = timer(1) + init_timer;
         timer = timer(1:t);
+        err = err(1:t);
         return;
     else
         fprintf('Iteration %d: error: %e, timer: %f \n', t, err(t), timer(t));
@@ -189,6 +191,6 @@ for t = 1 : max_iter
     
 end
 fprintf('Maximum iterations reached, final error: %e.\n======================================\n', err(t));
-err(1) = err(1) + init_timer;
+timer(1) = timer(1) + init_timer;
 end
 
