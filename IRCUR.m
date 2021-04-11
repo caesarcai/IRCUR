@@ -30,15 +30,6 @@ function [ C, pinv_U , R, timer, err ] = IRCUR( D, r, para )
 % CUR Accelerated Inexact Low Rank Estimation" if you use this code
 %
 %
-%
-%
-
-if exist('PROPACK', 'dir')==7
-    addpath PROPACK;
-    propack_exist = true;
-else
-    propack_exist = false;
-end
 
 [m,n]     = size(D);
 
@@ -147,10 +138,9 @@ for t = 1 : max_iter
     end
     
     %% update S
-    
-    if t == 1
+    if t == 1 
         zeta = beta_init;
-        L_cols =zeros(size(D_cols));
+        L_cols = zeros(size(D_cols));
         L_rows = zeros(size(D_rows));
         S_cols = wthresh( D_cols,'h',zeta);
         S_rows = wthresh( D_rows,'h',zeta);
@@ -163,7 +153,7 @@ for t = 1 : max_iter
     end
 
     
-    %% Update C pinv_U R
+    %% Update L = C * pinv_U * R
     C = D_cols-S_cols;
     R = D_rows-S_rows;
     MU = C(rows,:);
@@ -172,13 +162,14 @@ for t = 1 : max_iter
     Su = diag(1./d(1:r));
     pinv_U = Vu(:,1:r)*Su*(Uu(:,1:r))';
 
-    %% calculate L to get error
-%     L_cols = C * pinv_U * R(:,cols);
-%     L_rows = C (rows,:) * pinv_U * R;
+
     
     %% Stop Condition
+    % To save the computing of L_row and L_col in resample version, we are 
+    % actually computing err by perivous L and current S.  
     err(t) = (norm(D_rows-L_rows-S_rows, 'fro') + norm(D_cols-L_cols-S_cols, 'fro')) / norm_of_D;
     timer(t) = toc;
+    
     if err(t) < tol  
         fprintf('Total %d iteration, final error: %e, total time: %f  \n', t, err(t), sum(timer(timer>0)));
         timer(1) = timer(1) + init_timer;
@@ -193,4 +184,3 @@ end
 fprintf('Maximum iterations reached, final error: %e.\n======================================\n', err(t));
 timer(1) = timer(1) + init_timer;
 end
-

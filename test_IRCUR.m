@@ -53,7 +53,6 @@ figure;
 plot(cumsum(ircur_r_timer),ircur_r_err,'bD-',cumsum(ircur_f_timer),ircur_f_err,'r+-');
 legend('ICUR-R','ICUR-F');
 title('Relative Error vs Runtime');
-ylabel('Relative Error err');
+ylabel('Relative Error');
 xlabel('Time(secs)');
-set(gca,'TickLabelInterpreter','latex'); 
 set(gca,'YScale', 'log')
