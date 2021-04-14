@@ -41,7 +41,7 @@ para.resample  = true;
    * .resample : Whether the program resamples the rows and columns every iteration. (default true)
 
 ## Output Description
-1. $C$， $U^\dagger$， $R$ : CUR decomposition of $D = C\*pinv\_U\*R$, pinv_U is the seudo inverse of $U$.
+1. $C$， $U^\dagger$， $R$ : CUR decomposition of $D = C\*U^\dagger\*R$, $U^\dagger$ is the seudo inverse of $U$.
 1. timer : time consumed in each iteration.
 1. err: relative error of each iteration.
 
