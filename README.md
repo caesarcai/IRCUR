@@ -1,5 +1,5 @@
 # IRCUR for Rapid Robust PCA
-This is the Matlab code repo for a rapid non-convex Robust Principal Component Analysis (RPCA) algorithm, coined (Iterative Robust CUR) IRCUR [1].
+This is Matlab repo for a rapid non-convex Robust Principal Component Analysis (RPCA) algorithm, coined Iterative Robust CUR (IRCUR) [1].
 
 ###### To display math symbols properly, one may have to install a MathJax plugin. For example, [MathJax Plugin for Github](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima?hl=en).
 
