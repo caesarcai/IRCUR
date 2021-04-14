@@ -7,8 +7,7 @@ This is the Matlab code repo for a rapid non-convex Robust Principal Component A
 In this project, we focus on RPCA problem under fully observed setting, that is about separating a low rank matrix $L\in \mathbb{R}^{m\times n}$ and a sparse outlier matrix $S\in \mathbb{R}^{m\times n}$ from their sum $D = L + S$.
 
 ## Key Idea for Acceleration
-We used fast CUR decomposition in the place of low rank approximation and redesign all the costly steps in the classic alternating projections framework to reduce the computational complexity to $O(\max \lbrace m,n \rbrace r^2 \log(m) \log(n))$
-
+We used fast CUR decomposition in the place of low rank approximation and redesign all the costly steps in the classic alternating projections framework to reduce the computational complexity to $O(\max \lbrace m,n \rbrace r^2 \log(m) \log(n))$ flops. More details can be found in our paper [1].
 
 
 ## Syntex
