@@ -36,7 +36,7 @@ para.resample  = true;
    * .beta : Parameter for thresholding. (default 1/(2*nthroot(m\*n,4)))
    * .gamma : Parameter for desired convergence rate. Value should between 0 and 1. Turn this parameter bigger will slow the convergence speed but tolerate harder problem, such as higher $\alpha$, $r$ or $\mu$. (default 0.7)   
    * .mu : Incoherence of underlying low rank matrix. Input can be in format of .mu = mu_max, or .mu = [mu_U, mu_V]. (default 5) 
-   * .con : constant for row/column samples. $con\*r\*\log(n)$ rows and columns will be sampled. (default 4)
+   * .con : constant for row/column samples. $con\*r\*\log(m)$ rows and $con\*r\*\log(n)$ columns will be sampled. (default 4)
    * .resample : Whether the program resamples the rows and columns every iteration. (default true)
 
 ## Output Description
@@ -48,4 +48,4 @@ para.resample  = true;
 Clone the codes and run the demo file *test_IRCUR.m*. It contains 2 demos, one for IRCUR-R (resample rows/columns every iterations), another for IRCUR-F (no iterative resample). We also plot the relative err vs time per iteration for you, which should show the linear convergence of IRCUR.
 
 ## Reference
-[1] HanQin Cai, Keaton Hamm, Longxiu Huang, Jiaqi Li, and Tao Wang. Rapid Robust Principal Component Analysis: CUR Accelerated Inexact Low Rank Estimation, IEEE Signal Processing Letters, 28 (2021): 116-120.
+[1] HanQin Cai, Keaton Hamm, Longxiu Huang, Jiaqi Li, and Tao Wang. Rapid Robust Principal Component Analysis: CUR Accelerated Inexact Low Rank Estimation, *IEEE Signal Processing Letters*, 28 (2021): 116-120.
