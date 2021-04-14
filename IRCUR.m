@@ -12,8 +12,8 @@ function [ C, pinv_U , R, timer, err ] = IRCUR( D, r, para )
 %   .beta : Parameter for thresholding. (default 1/(2*nthroot(m*n,4)))
 %   .gamma : Parameter for desired convergence rate. Value should between 0
 %            and 1. Turn this parameter bigger will slow the convergence
-%            speed but tolerate harder problem, such as higher p, r or mu. 
-%            (default 0.7)   
+%            speed but tolerate harder problem, such as higher alpha, r or  
+%            mu. (default 0.7)   
 %   .mu : Incoherence of underlying low rank matrix. Input can be in format
 %         of .mu = mu_max, or .mu = [mu_U, mu_V]. (default 5) 
 %   .con : constant for row/column samples. con*r*log(n) rows and columns
