@@ -6,6 +6,7 @@ r = 5;        % rank
 alpha = 0.3;  % Percentage of outliers 
 c = 5;        % Parameter controls the size of outliers
 
+
 %% Generate a RPCA problem
 disp('Generating a RPCA problem.')
 A_generater = randn(m,r);
@@ -25,7 +26,7 @@ D = L_true + S_true;
 
 %% IRCUR-R    % Resample row/column version
 disp('Running IRCUR-R now.')
-para.beta_init = 2*max(max(abs(L_true)));
+para.beta_init = 1.5*max(abs(L_true(:)));
 para.beta      = para.beta_init;
 para.tol       = 1e-5;
 para.con       = 3;
@@ -48,10 +49,18 @@ para2.resample  = false;
 recover_err_ircur_f = norm(L_true - C2 * pinv_U2 * R2, 'fro') / norm(L_true,'fro')
 
 
+
+%% Using All Defalut Setting   % Check IRCUR.m for the defalut settings
+[C3, pinv_U3, R3, ircur_d_timer, ircur_d_err] = IRCUR( D, r, '');
+
+recover_err_ircur_d = norm(L_true - C3 * pinv_U3 * R3, 'fro') / norm(L_true,'fro')
+
+
+
 %% Plot the converegence
 figure;
-plot(cumsum(ircur_r_timer),ircur_r_err,'bD-',cumsum(ircur_f_timer),ircur_f_err,'r+-');
-legend('ICUR-R','ICUR-F');
+plot(cumsum(ircur_r_timer),ircur_r_err,'bD-',cumsum(ircur_f_timer),ircur_f_err,'r+-',cumsum(ircur_d_timer),ircur_d_err,'g*-');
+legend('ICUR-R','ICUR-F','IRCUR-Defalut');
 title('Relative Error vs Runtime');
 ylabel('Relative Error');
 xlabel('Time(secs)');

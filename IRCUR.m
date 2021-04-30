@@ -7,9 +7,8 @@ function [ C, pinv_U , R, timer, err ] = IRCUR( D, r, para )
 % params : parameters for the algorithm
 %   .max_iter : Maximum number of iterations. (default 200)
 %   .tol : Desired Frobenius norm error. (default 1e-6)
-%   .beta_init : Parameter for thresholding at initialization. (default
-%                4*beta)
-%   .beta : Parameter for thresholding. (default 1/(2*nthroot(m*n,4)))
+%   .zeta_init : Parameter for thresholding at initialization. (default
+%                max(abs(D(:))))
 %   .gamma : Parameter for desired convergence rate. Value should between 0
 %            and 1. Turn this parameter bigger will slow the convergence
 %            speed but tolerate harder problem, such as higher alpha, r or  
@@ -35,28 +34,21 @@ function [ C, pinv_U , R, timer, err ] = IRCUR( D, r, para )
 
 %% Default/Inputed parameters
 max_iter  = 200;
-tol       = 1e-6;
-beta      = 1/(2*nthroot(m*n,4));
-beta_init = 4*beta;
+tol       = 1e-5;
+zeta_init = max(abs(D(:)));
 gamma     = 0.7;    
 mu        = 5;     
 con       = 4;
 resample  = true;
 
 %% parameter setting
-if isfield(para,'beta_init') 
-    beta_init = para.beta_init; 
-    fprintf('beta_init = %f set.\n', beta_init);
+if isfield(para,'zeta_init') 
+    zeta_init = para.zeta_init; 
+    fprintf('zeta_init = %f set.\n', zeta_init);
 else
-    fprintf('using default beta_init = %f.\n', beta_init);
+    fprintf('using default zeta_init = %f.\n', zeta_init);
 end
 
-if isfield(para,'beta') 
-    beta = para.beta; 
-    fprintf('beta = %f set.\n', beta);
-else
-    fprintf('using default beta = %f.\n', beta);
-end
 
 if isfield(para,'gamma') 
     gamma = para.gamma; 
@@ -139,7 +131,7 @@ for t = 1 : max_iter
     
     %% update S
     if t == 1 
-        zeta = beta_init;
+        zeta = zeta_init;
         L_cols = zeros(size(D_cols));
         L_rows = zeros(size(D_rows));
         S_cols = wthresh( D_cols,'h',zeta);
