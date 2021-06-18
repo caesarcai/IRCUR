@@ -1,5 +1,7 @@
 # IRCUR for Rapid Robust PCA
-This is Matlab repo for a rapid non-convex Robust Principal Component Analysis (RPCA) algorithm, coined Iterative Robust CUR (IRCUR) [1].
+This is Matlab repo for a rapid non-convex Robust Principal Component Analysis (RPCA) algorithm, coined Iterative Robust CUR (IRCUR):
+
+[1] HanQin Cai, Keaton Hamm, Longxiu Huang, Jiaqi Li, and Tao Wang. Rapid Robust Principal Component Analysis: CUR Accelerated Inexact Low Rank Estimation, *IEEE Signal Processing Letters*, 28 (2021): 116-120.
 
 ###### To display math symbols properly, one may have to install a MathJax plugin. For example, [MathJax Plugin for Github](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima?hl=en).
 
@@ -47,5 +49,5 @@ para.resample  = true;
 ## Demo
 Clone the codes and run the demo file *test_IRCUR.m*. It contains 2 demos, one for IRCUR-R (resample rows/columns every iterations), another for IRCUR-F (no iterative resample). We also plot the relative err vs time per iteration for you, which should show the linear convergence of IRCUR.
 
-## Reference
-[1] HanQin Cai, Keaton Hamm, Longxiu Huang, Jiaqi Li, and Tao Wang. Rapid Robust Principal Component Analysis: CUR Accelerated Inexact Low Rank Estimation, *IEEE Signal Processing Letters*, 28 (2021): 116-120.
+
+
