@@ -50,8 +50,8 @@ para.resample  = true;
 Clone the codes and run the demo file *test_IRCUR.m*. It contains 2 demos, one for IRCUR-R (resample rows/columns every iterations), another for IRCUR-F (no iterative resample). We also plot the relative err vs time per iteration for you, which should show the linear convergence of IRCUR.
 
 ## Video Demo
-https://youtu.be/05CdKIy2KEA
+Shoppingmall: https://youtu.be/05CdKIy2KEA
 
-https://youtu.be/rfkRkeOGJHM
+Restaurant: https://youtu.be/rfkRkeOGJHM
 
 
