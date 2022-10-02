@@ -5,6 +5,8 @@ This is Matlab repo for a rapid non-convex Robust Principal Component Analysis (
 
 ###### To display math symbols properly, one may have to install a MathJax plugin. For example, [MathJax Plugin for Github](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima?hl=en).
 
+The python version is also available in https://github.com/sverdoot/robust-pca
+
 ## Robust Principal Component Analysis
 In this project, we focus on RPCA problem under fully observed setting, that is about separating a low rank matrix $L\in \mathbb{R}^{m\times n}$ and a sparse outlier matrix $S\in \mathbb{R}^{m\times n}$ from their sum $D = L + S$.
 
