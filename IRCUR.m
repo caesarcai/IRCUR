@@ -28,9 +28,8 @@ function [ C, pinv_U , R, timer, err ] = IRCUR( D, r, para )
 % Please cite our paper "Rapid Robust Principal Component Analysis: 
 % CUR Accelerated Inexact Low Rank Estimation" if you use this code
 %
-%
 
-[m,n]     = size(D);
+
 
 %% Default/Inputed parameters
 max_iter  = 200;
@@ -139,8 +138,8 @@ for t = 1 : max_iter
     else
         zeta = gamma * zeta;
         % L_cols = C*pinv_U*(R(:,cols));
-        % L_rows = (C(rows,:))*pinv_U*R;
         L_cols = C*Vu(:,1:r)*(Su*(Uu(:,1:r))'*(R(:,cols)));
+        % L_rows = (C(rows,:))*pinv_U*R;
         L_rows = (C(rows,:))*Vu(:,1:r)*(Su*(Uu(:,1:r))'*R);
         S_rows = wthresh( D_rows-L_rows,'h',zeta);
         S_cols = wthresh( D_cols-L_cols,'h',zeta);
