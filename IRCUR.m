@@ -138,8 +138,10 @@ for t = 1 : max_iter
         S_rows = wthresh( D_rows,'h',zeta);
     else
         zeta = gamma * zeta;
-        L_cols = C*pinv_U*(R(:,cols));
-        L_rows = (C(rows,:))*pinv_U*R;
+        % L_cols = C*pinv_U*(R(:,cols));
+        % L_rows = (C(rows,:))*pinv_U*R;
+        L_cols = C*Vu(:,1:r)*(Su*(Uu(:,1:r))'*(R(:,cols)));
+        L_rows = (C(rows,:))*Vu(:,1:r)*(Su*(Uu(:,1:r))'*R);
         S_rows = wthresh( D_rows-L_rows,'h',zeta);
         S_cols = wthresh( D_cols-L_cols,'h',zeta);
     end
@@ -152,18 +154,19 @@ for t = 1 : max_iter
     [Uu,Su,Vu] = svd(MU);
     d = diag(Su);
     Su = diag(1./d(1:r));
-    pinv_U = Vu(:,1:r)*Su*(Uu(:,1:r))';
+    % pinv_U = Vu(:,1:r)*Su*(Uu(:,1:r))';
 
 
     
     %% Stop Condition
     % To save the computing of L_row and L_col in resample version, we are 
-    % actually computing err by perivous L and current S.  
+    % actually computing err with perivous L and current S.  
     err(t) = (norm(D_rows-L_rows-S_rows, 'fro') + norm(D_cols-L_cols-S_cols, 'fro')) / norm_of_D;
     timer(t) = toc;
     
     if err(t) < tol  
         fprintf('Total %d iteration, final error: %e, total time: %f  \n', t, err(t), sum(timer(timer>0)));
+        pinv_U = Vu(:,1:r)*Su*(Uu(:,1:r))';
         timer(1) = timer(1) + init_timer;
         timer = timer(1:t);
         err = err(1:t);
@@ -174,5 +177,6 @@ for t = 1 : max_iter
     
 end
 fprintf('Maximum iterations reached, final error: %e.\n======================================\n', err(t));
+pinv_U = Vu(:,1:r)*Su*(Uu(:,1:r))';
 timer(1) = timer(1) + init_timer;
 end
